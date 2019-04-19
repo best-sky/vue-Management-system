@@ -1,0 +1,87 @@
+/*!
+ * reset styles for project
+ * zwwang5 | 05/23/2018
+ */
+
+/**
+ * use border-box for easier control of layout
+ */
+
+html {
+  color: #333;
+  box-sizing: border-box;
+  font-family: 'Microsoft YaHei', sans-serif, serif;
+  font-size: 16px;
+  background-color: #fdfdfd;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+legend {
+  box-sizing: border-box;
+}
+
+fieldset {
+  margin: 0;
+}
+
+/**
+ * remove p `margin`
+ */
+
+p {
+  margin: 0;
+}
+
+/**
+ * remove input `padding: 1px 0`
+ * set font-family to prevent default
+ */
+
+input {
+  padding: 0;
+}
+
+input,
+button {
+  font-family: 'Microsoft YaHei', sans-serif, serif;
+}
+
+/**
+ * remove list style
+ */
+
+ul,
+ol,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+#content {
+  
+}

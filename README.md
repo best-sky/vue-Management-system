@@ -25,5 +25,7 @@ npm run test
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### 技术点
+1、使用VUE-CLI 3.0 进行搭建的环境
+2、首页登录使用了vue-particles粒子效果
+3、图表使用的是echarts，图表的大小可以根据屏幕自适应大小，并且可以动态的更新图表的数据
