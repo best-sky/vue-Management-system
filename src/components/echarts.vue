@@ -26,17 +26,12 @@ export default {
       now: 0,
       value: Math.random() * 1000,
       echartData: [
-        {
-          name: "0",
-          value: [0, 0]
-        }
+        
       ],
       echartData2:[
-        {
-          name: "0",
-          value: [0, 0]
-        }
-      ]
+        
+      ],
+      xData:[]
     };
   },
   computed: {
@@ -57,10 +52,10 @@ export default {
       });
     },
     drawLine() {
-      for (var i = 0; i < 2; i++) {
-        this.echartData.push(this.randomData());
-        this.echartData2.push(this.randomData2());
-      }
+      // for (var i = 0; i < 2; i++) {
+      //   this.echartData.push(this.randomData());
+      //   this.echartData2.push(this.randomData2());
+      // }
       this.myChart.setOption({
         title: {
           text: "亚低温监控系统",
@@ -72,8 +67,9 @@ export default {
           axisPointer: { animation: false }
         },
         xAxis: {
-          type: 'value',
-          boundaryGap: false
+          type: 'category',
+          boundaryGap: false,
+          data:this.xData
         },
         yAxis: {
           type: "value"
@@ -124,80 +120,121 @@ export default {
         value: [this.now, Math.random() * 100]
       };
     },
+    //数据处理
+    conductData(data){
+      for(var i=0;i<data.length;i++){
+        if(this.lineTitle1 == "水温1"){
+          var data1 = {
+          name:timestampToTime(data[i].date),
+          value:[timestampToTime(data[i].date),data[i].waterT1]
+          }
+          var data2 = {
+            name:timestampToTime(data[i].date),
+            value:[timestampToTime(data[i].date),data[i].waterT2]
+          }
+        }
+        if(this.lineTitle1 == "毯温1"){
+          var data1 = {
+          name:timestampToTime(data[i].date),
+          value:[timestampToTime(data[i].date),data[i].rugLT]
+          }
+          var data2 = {
+            name:timestampToTime(data[i].date),
+            value:[timestampToTime(data[i].date),data[i].rugRT]
+          }
+        }
+        if(this.lineTitle1 == "体温1"){
+          var data1 = {
+          name:timestampToTime(data[i].date),
+          value:[timestampToTime(data[i].date),data[i].bodyLT]
+          }
+          var data2 = {
+            name:timestampToTime(data[i].date),
+            value:[timestampToTime(data[i].date),data[i].bodyRT]
+          }
+        }
+        this.echartData.push(data1.value[1])
+        this.echartData2.push(data2.value[1])
+        this.xData.push(data1.name)
+      }
+    },
     //获取图表数据
-    // getEchartsData(){
-    //   this.$axios({
-    //     url: "data/OneData",
-    //     method: "POST",
-    //     data:{
-    //       id:this.selectValue
-    //     }
-    //   }).then(res => {
-    //     if(res.status == 200){
-    //       console.log(res)
-    //     }
-    //   });
-    // }
+    getEchartsData(){
+      this.$axios({
+        url: "data/OneData",
+        method: "POST",
+        data:{
+          id:localStorage.getItem("selectData")
+        }
+      }).then(res => {
+        if(res.status == 200){
+          this.conductData(res.data)
+          console.log(this.echartData)
+          console.log(this.echartData2)
+          this.drawLine();
+        }
+      });
+    }
   },
   mounted() {
     console.log(timestampToTime (1533293827000))
-    this.drawLine();
-    this.timer = setInterval(() => {
-      // let myChart = echarts.init(document.getElementById("myChart"));
-      if (this.echartData.length < 8) {
-        this.echartData.push(this.randomData());
-        this.echartData2.push(this.randomData2());
-      } else {
-        for (var i = 0; i < 1; i++) {
-          this.echartData.shift();
-          this.echartData2.shift();
-          this.echartData.push(this.randomData());
-          this.echartData2.push(this.randomData2());
-        }
-      }
-      this.myChart.setOption({
-        series: [
-          {
-            name: this.lineTitle1,
-            type: "line",
-            showSymbol: true,
-            hoverAnimation: false,
-            //stack: '总量',
-            data: this.echartData,
-            smooth: true,
-            symbolSize: 8,
-            itemStyle: {
-              normal: {
-                color: "red"
-              }
-            }
-          },
-          {
-            name: this.lineTitle2,
-            type: "line",
-            showSymbol: true,
-            hoverAnimation: false,
-            data: this.echartData2,
-            smooth: true,
-            symbolSize: 8,
-            itemStyle: {
-              normal: {
-                color: "black"
-              }
-            }
-          }
-        ]
-      });
-      this.myChart.setOption({
-        xAxis: [
-          {
-            type: "value",
-            splitLine: { show: false },
-            min: +this.echartData[0].name
-          }
-        ]
-      });
-    }, 5000);
+    this.getEchartsData()
+    // this.timer = setInterval(() => {
+    //   // let myChart = echarts.init(document.getElementById("myChart"));
+    //   if (this.echartData.length < 8) {
+    //     this.echartData.push(this.randomData());
+    //     this.echartData2.push(this.randomData2());
+    //   } else {
+    //     for (var i = 0; i < 1; i++) {
+    //       this.echartData.shift();
+    //       this.echartData2.shift();
+    //       this.echartData.push(this.randomData());
+    //       this.echartData2.push(this.randomData2());
+    //     }
+    //   }
+    //   this.myChart.setOption({
+    //     series: [
+    //       {
+    //         name: this.lineTitle1,
+    //         type: "line",
+    //         showSymbol: true,
+    //         hoverAnimation: false,
+    //         //stack: '总量',
+    //         data: this.echartData,
+    //         smooth: true,
+    //         symbolSize: 8,
+    //         itemStyle: {
+    //           normal: {
+    //             color: "red"
+    //           }
+    //         }
+    //       },
+    //       {
+    //         name: this.lineTitle2,
+    //         type: "line",
+    //         showSymbol: true,
+    //         hoverAnimation: false,
+    //         data: this.echartData2,
+    //         smooth: true,
+    //         symbolSize: 8,
+    //         itemStyle: {
+    //           normal: {
+    //             color: "black"
+    //           }
+    //         }
+    //       }
+    //     ]
+    //   });
+    //   this.myChart.setOption({
+    //     xAxis: [
+    //       {
+    //         type: "value",
+    //         splitLine: { show: false },
+    //         min: +this.echartData[0].name
+    //       }
+    //     ]
+    //   });
+    // }, 5000);
     this.setSize();
     // 渲染图表
     // this.renderLine();

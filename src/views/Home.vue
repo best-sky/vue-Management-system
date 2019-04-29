@@ -75,12 +75,14 @@ export default {
             this.options.push(data)
           }
           this.selectValue = res.data[0]
+          localStorage.setItem("selectData",this.selectValue)
         }
       });
     },
     //下拉改变
     getValue() {
-      console.log(this.selectValue);
+      localStorage.setItem("selectData",this.selectValue)
+      window.onload()
     },
   },
   mounted(){

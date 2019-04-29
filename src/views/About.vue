@@ -1,6 +1,6 @@
 <template>
   <div class="Temperature">
-    <line-echart lineTitle1="毯温1" lineTitle2="毯温2"></line-echart>
+    <line-echart lineTitle1="水温1" lineTitle2="水温2"></line-echart>
   </div>
 </template>
 

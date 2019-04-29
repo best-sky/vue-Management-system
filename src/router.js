@@ -3,7 +3,8 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 import Index from './views/About.vue'
-import Message from './views/Message.vue'
+import Temperature from './views/Temperature.vue'
+import Temperature2 from './views/Temperature2.vue'
 
 Vue.use(Router)
 
@@ -27,9 +28,14 @@ export default new Router({
           component:Index
         },
         {
-          path:'/message',
-          name:'message',
-          component:Message
+          path:'/temperature',
+          name:'temperature',
+          component:Temperature
+        },
+        {
+          path:'/temperature2',
+          name:'temperature2',
+          component:Temperature2
         }
       ]
     },
