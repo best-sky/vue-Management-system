@@ -78,6 +78,10 @@ export default {
         }
       });
     },
+    //下拉改变
+    getValue() {
+      console.log(this.selectValue);
+    },
   },
   mounted(){
     this.getSelectList()
