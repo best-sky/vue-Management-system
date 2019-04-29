@@ -25,8 +25,7 @@ export default {
           name: "0",
           value: [0, 0]
         }
-      ],
-      xData:[]
+      ]
     };
   },
   computed: {
@@ -48,14 +47,10 @@ export default {
     },
     drawLine() {
       // // let myChart = echarts.init(document.getElementById("myChart"));
-      for (var i = 0; i < 7; i++) {
-        this.now = this.now + 1;
+      for (var i = 0; i < 2; i++) {
         this.echartData.push(this.randomData());
-        this.echartData2.push(this.randomData());
-        this.xData.push(this.now)
+        this.echartData2.push(this.randomData2());
       }
-      console.log(this.echartData)
-      console.log(this.echartData2)
       this.myChart.setOption({
         title: {
           text: "亚低温监控系统",
@@ -64,17 +59,11 @@ export default {
         },
         tooltip: {
           trigger: "axis",
-          // formatter: function(params) {
-          //   params = params[0];
-          //   var date = new Date(params.name);
-          //   return params.value[1];
-          // },
-          // axisPointer: { animation: false }
+          axisPointer: { animation: false }
         },
         xAxis: {
-          type: 'category',
-          boundaryGap: false,
-          data: this.xData
+          type: 'value',
+          boundaryGap: false
         },
         yAxis: {
           type: "value"
@@ -112,6 +101,8 @@ export default {
       });
     },
     randomData() {
+      this.now = this.now +1
+      this.value = this.value +Math.random()*21 -10
       return {
         name: this.now.toString(),
         value: [this.now, Math.random() * 100]
@@ -144,26 +135,20 @@ export default {
   },
   mounted() {
     this.drawLine();
-    var _this = this
     this.timer = setInterval(() => {
       // let myChart = echarts.init(document.getElementById("myChart"));
-      _this.now = _this.now + 1;
-      if (_this.echartData.length < 8) {
-        _this.echartData.push(this.randomData());
-        _this.echartDat2.push(this.randomData2());
+      if (this.echartData.length < 8) {
+        this.echartData.push(this.randomData());
+        this.echartData2.push(this.randomData2());
       } else {
         for (var i = 0; i < 1; i++) {
-          _this.echartData.shift();
-          _this.echartData2.shift();
-          _this.xData.shift()
-          _this.echartData.push(_this.randomData());
-          _this.echartDat2.push(_this.randomData2());
-          _this.xData.push(_this.now)
+          this.echartData.shift();
+          this.echartData2.shift();
+          this.echartData.push(this.randomData());
+          this.echartData2.push(this.randomData2());
         }
       }
-      console.log(_this.echartData)
-      console.log(_this.echartData2)
-      _this.myChart.setOption({
+      this.myChart.setOption({
         series: [
           {
             name: "水温1",
@@ -171,7 +156,7 @@ export default {
             showSymbol: true,
             hoverAnimation: false,
             //stack: '总量',
-            data: _this.echartData,
+            data: this.echartData,
             smooth: true,
             symbolSize: 8,
             itemStyle: {
@@ -185,7 +170,7 @@ export default {
             type: "line",
             showSymbol: true,
             hoverAnimation: false,
-            data: _this.echartData2,
+            data: this.echartData2,
             smooth: true,
             symbolSize: 8,
             itemStyle: {
@@ -201,7 +186,7 @@ export default {
           {
             type: "value",
             splitLine: { show: false },
-            data: _this.xData
+            min: +this.echartData[0].name
           }
         ]
       });
