@@ -4,6 +4,11 @@
       <el-col :span="21" class="header-left">
         <img src="../assets/images/logo.png" alt="">
         <span>亚低温监控系统</span>
+        <div class="select-content">
+          <el-select v-model="selectValue" placeholder="请选择" @change="getValue()">
+            <el-option v-for="item in options" :key="item.value" :value="item.value"></el-option>
+          </el-select>
+        </div>
       </el-col>
       <el-col :span="3"
               class="userinfo">
@@ -36,6 +41,9 @@ export default {
   data () {
     return {
       name: "管理员",
+       options: [
+      ],
+      selectValue: ""
     }
   },
   components: {
@@ -53,7 +61,27 @@ export default {
 
       });
     },
+    //获取selectList的数据
+    getSelectList() {
+      this.$axios({
+        url: "data/list",
+        method: "POST",
+      }).then(res => {
+        if(res.status == 200){
+          for(var i = 0;i<res.data.length;i++){
+            var data = {
+              value:res.data[i]
+            }
+            this.options.push(data)
+          }
+          this.selectValue = res.data[0]
+        }
+      });
+    },
   },
+  mounted(){
+    this.getSelectList()
+  }
 }
 </script>
 <style lang="less" scoped>
@@ -117,6 +145,11 @@ export default {
   padding: 20px;
   overflow-y: auto;
   height: 100%;
+}
+.select-content {
+  position: fixed;
+  left: 220px;
+  top: 13px;
 }
 </style>
 

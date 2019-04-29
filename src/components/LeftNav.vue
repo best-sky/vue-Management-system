@@ -8,16 +8,15 @@
                background-color="#30363E"
                text-color="#a0aebc"
                active-text-color="#ffffff"
-               @open="handleOpen"
-               @close="handleClose">
-        <el-menu-item index="/index">
+              >
+          <el-menu-item index="/index">
+            <i class="el-icon-document"></i>
+            <span slot="title">水温</span>
+          </el-menu-item>
+          <el-menu-item index="/message">
           <i class="el-icon-document"></i>
-          <span slot="title">数据</span>
-        </el-menu-item>
-        <el-menu-item index="/message">
-          <i class="el-icon-document"></i>
-          <span slot="title">关于</span>
-        </el-menu-item>
+          <span slot="title">毯温</span>
+          </el-menu-item>
       </el-menu>
     </el-col>
   </div>
@@ -32,12 +31,7 @@ export default {
     };
   },
   methods: {
-    handleOpen (key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose (key, keyPath) {
-      console.log(key, keyPath);
-    }
+    
   }
 };
 </script>

@@ -11,7 +11,7 @@ module.exports = {
     open: true,
     proxy: {
       '/': {
-        target: '',
+        target: 'http://shixiang.ngrok.xiaomiqiu.cn',
         ws: false,
         changeOrigin: true
       }

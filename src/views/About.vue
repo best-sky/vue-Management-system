@@ -1,8 +1,8 @@
 <template>
   <div class="about">
     <div id="myChartWrap">
-    <!-- 这里是要渲染的图表 -->
-    <div id="myChart"></div>
+      <!-- 这里是要渲染的图表 -->
+      <div id="myChart"></div>
     </div>
   </div>
 </template>
@@ -19,18 +19,25 @@ export default {
           name: "0",
           value: [0, 0]
         }
-      ]
+      ],
+      echartData2:[
+        {
+          name: "0",
+          value: [0, 0]
+        }
+      ],
+      xData:[]
     };
   },
   computed: {
-    myChart () {
+    myChart() {
       console.log("生成myChart实例");
       return echarts.init(document.getElementById("myChart"));
     }
   },
   methods: {
     //设置图表的宽高
-    setSize () {
+    setSize() {
       console.log("setSize被执行");
       let wrapWidth = document.getElementById("myChartWrap").clientWidth;
       let wrapHeight = document.getElementById("myChartWrap").clientHeight;
@@ -40,85 +47,152 @@ export default {
       });
     },
     drawLine() {
-      // let myChart = echarts.init(document.getElementById("myChart"));
-      for (var i = 0; i < 2; i++) {
+      // // let myChart = echarts.init(document.getElementById("myChart"));
+      for (var i = 0; i < 7; i++) {
+        this.now = this.now + 1;
         this.echartData.push(this.randomData());
+        this.echartData2.push(this.randomData());
+        this.xData.push(this.now)
       }
+      console.log(this.echartData)
+      console.log(this.echartData2)
       this.myChart.setOption({
         title: {
-          text: "亚低温监控系统"
+          text: "亚低温监控系统",
+          x: "center",
+          y: "bottom"
         },
         tooltip: {
           trigger: "axis",
-          formatter: function(params) {
-            params = params[0];
-            var date = new Date(params.name);
-            return params.value[1];
-          },
-          axisPointer: { animation: false }
+          // formatter: function(params) {
+          //   params = params[0];
+          //   var date = new Date(params.name);
+          //   return params.value[1];
+          // },
+          // axisPointer: { animation: false }
         },
         xAxis: {
-          type: "value",
-          boundaryGap: false
+          type: 'category',
+          boundaryGap: false,
+          data: this.xData
         },
         yAxis: {
           type: "value"
         },
         series: [
           {
-            name: "模拟数据",
+            name: "水温1",
             type: "line",
             showSymbol: true,
             hoverAnimation: false,
             data: this.echartData,
             smooth: true,
-            symbolSize:8,
-            itemStyle:{
-              normal:{
-                color:'red'
+            symbolSize: 8,
+            itemStyle: {
+              normal: {
+                color: "red"
               }
-            },
+            }
+          },
+          {
+            name: "水温2",
+            type: "line",
+            showSymbol: true,
+            hoverAnimation: false,
+            data: this.echartData2,
+            smooth: true,
+            symbolSize: 8,
+            itemStyle: {
+              normal: {
+                color: "black"
+              }
+            }
           }
         ]
       });
     },
     randomData() {
-      this.now = this.now + 1;
-      this.value = this.value + Math.random() * 21 - 10;
       return {
         name: this.now.toString(),
         value: [this.now, Math.random() * 100]
       };
-    }
+    },
+    randomData2() {
+     return {
+        name: this.now.toString(),
+        value: [this.now, Math.random() * 100]
+      };
+    },
+    //下拉改变
+    getValue() {
+      console.log(this.selectValue);
+    },
+    //获取图表数据
+    // getEchartsData(){
+    //   this.$axios({
+    //     url: "data/OneData",
+    //     method: "POST",
+    //     data:{
+    //       id:this.selectValue
+    //     }
+    //   }).then(res => {
+    //     if(res.status == 200){
+    //       console.log(res)
+    //     }
+    //   });
+    // }
   },
   mounted() {
     this.drawLine();
+    var _this = this
     this.timer = setInterval(() => {
       // let myChart = echarts.init(document.getElementById("myChart"));
-      if (this.echartData.length < 8) {
-        this.echartData.push(this.randomData());
+      _this.now = _this.now + 1;
+      if (_this.echartData.length < 8) {
+        _this.echartData.push(this.randomData());
+        _this.echartDat2.push(this.randomData2());
       } else {
         for (var i = 0; i < 1; i++) {
-          this.echartData.shift();
-          this.echartData.push(this.randomData());
+          _this.echartData.shift();
+          _this.echartData2.shift();
+          _this.xData.shift()
+          _this.echartData.push(_this.randomData());
+          _this.echartDat2.push(_this.randomData2());
+          _this.xData.push(_this.now)
         }
       }
-      this.myChart.setOption({
+      console.log(_this.echartData)
+      console.log(_this.echartData2)
+      _this.myChart.setOption({
         series: [
           {
-            name: "模拟数据",
+            name: "水温1",
             type: "line",
             showSymbol: true,
             hoverAnimation: false,
             //stack: '总量',
-            data: this.echartData,
+            data: _this.echartData,
             smooth: true,
-            symbolSize:8,
-            itemStyle:{
-              normal:{
-                color:'orange'
+            symbolSize: 8,
+            itemStyle: {
+              normal: {
+                color: "red"
               }
-            },
+            }
+          },
+          {
+            name: "水温2",
+            type: "line",
+            showSymbol: true,
+            hoverAnimation: false,
+            data: _this.echartData2,
+            smooth: true,
+            symbolSize: 8,
+            itemStyle: {
+              normal: {
+                color: "black"
+              }
+            }
           }
         ]
       });
@@ -127,7 +201,7 @@ export default {
           {
             type: "value",
             splitLine: { show: false },
-            min: +this.echartData[0].name
+            data: _this.xData
           }
         ]
       });
@@ -141,7 +215,7 @@ export default {
       this.setSize();
     };
   },
-  destroyed(){
+  destroyed() {
     clearInterval(this.timer);
   }
 };
@@ -150,6 +224,7 @@ export default {
 #myChartWrap {
   width: 100%;
   height: 55vh;
+  position: relative;
 }
 </style>
 
