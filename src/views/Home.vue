@@ -42,6 +42,12 @@ export default {
     return {
       name: "管理员",
        options: [
+         {
+           value:2222
+         },
+         {
+           value:3333
+         }
       ],
       selectValue: ""
     }
@@ -75,14 +81,13 @@ export default {
             this.options.push(data)
           }
           this.selectValue = res.data[0]
-          localStorage.setItem("selectData",this.selectValue)
+          //localStorage.setItem("selectData",this.selectValue)
         }
       });
     },
     //下拉改变
     getValue() {
-      localStorage.setItem("selectData",this.selectValue)
-      window.onload()
+      this.resetSetItem('selectData', this.selectValue);
     },
   },
   mounted(){

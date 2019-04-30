@@ -27,6 +27,27 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
+//动态监控localstroage的变化
+// 添加全局事件监控方法
+Vue.prototype.resetSetItem = function (key, newVal) {
+  if (key === 'selectData') {
+
+    // 创建一个StorageEvent事件
+    var newStorageEvent = document.createEvent('StorageEvent');
+    const storage = {
+      setItem: function (k, val) {
+        localStorage.setItem(k, val);
+
+        // 初始化创建的事件
+        newStorageEvent.initStorageEvent('setItem', false, false, k, null, val, null, null);
+
+        // 派发对象
+        window.dispatchEvent(newStorageEvent)
+      }
+    }
+    return storage.setItem(key, newVal);
+  }
+}
 
 new Vue({
   router,

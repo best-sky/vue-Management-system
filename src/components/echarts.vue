@@ -176,6 +176,12 @@ export default {
       });
     }
   },
+  created(){
+    //检测select下拉变化
+    window.addEventListener('setItem', ()=> {
+      console.log(localStorage.getItem('selectData'));
+    })
+  },
   mounted() {
     console.log(timestampToTime (1533293827000))
     this.getEchartsData()
