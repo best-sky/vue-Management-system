@@ -23,9 +23,10 @@ export default {
   },
   data() {
     return {
-      now: +new Date(2012, 9, 3),
+      now: new Date(2019,4,7),
       value: Math.random() * 1000,
       oneDay:24 * 3600 * 1000,
+      oneHours:3600 * 1000,
       data: [],
       data2: []
     };
@@ -52,7 +53,7 @@ export default {
       //   this.echartData.push(this.randomData());
       //   this.echartData2.push(this.randomData2());
       // }
-      for (var i = 0; i < 100; i++) {
+      for (var i = 0; i < 24; i++) {
             this.data.push(this.randomData());
             this.data2.push(this.randomData2())
         }
@@ -76,7 +77,9 @@ export default {
             splitLine: {
                 show: false
             },
-            splitNumber:24
+            axisLabel:{
+                show: true
+            }
         },
          yAxis: {
             type: 'value',
@@ -114,12 +117,12 @@ export default {
       });
     },
     randomData() {
-      this.now = new Date(+this.now + this.oneDay);
+      this.now = new Date(+this.now + 3600*1000);
       this.value = this.value + Math.random() * 21 - 10;
       return {
         name: this.now.toString(),
         value: [
-          [this.now.getFullYear(), this.now.getMonth() + 1, this.now.getDate()].join("/"),
+         this.now,
           Math.round(this.value)
         ]
       };
@@ -128,7 +131,7 @@ export default {
       return {
         name: this.now.toString(),
         value: [
-          [this.now.getFullYear(), this.now.getMonth() + 1, this.now.getDate()].join("/"),
+          this.now,
           Math.round(this.value+100)
         ]
       };
@@ -144,7 +147,7 @@ export default {
     console.log(timestampToTime(1533293827000));
     this.timer = setInterval(() => {
       // let myChart = echarts.init(document.getElementById("myChart"));
-      for (var i = 0; i < 5; i++) {
+      for (var i = 0; i < 24; i++) {
             this.data.shift();
             this.data2.shift()
             this.data.push(this.randomData());

@@ -69,21 +69,21 @@ export default {
     },
     //获取selectList的数据
     getSelectList() {
-      this.$axios({
-        url: "data/list",
-        method: "POST",
-      }).then(res => {
-        if(res.status == 200){
-          for(var i = 0;i<res.data.length;i++){
-            var data = {
-              value:res.data[i]
-            }
-            this.options.push(data)
-          }
-          this.selectValue = res.data[0]
-          //localStorage.setItem("selectData",this.selectValue)
-        }
-      });
+      // this.$axios({
+      //   url: "data/list",
+      //   method: "POST",
+      // }).then(res => {
+      //   if(res.status == 200){
+      //     for(var i = 0;i<res.data.length;i++){
+      //       var data = {
+      //         value:res.data[i]
+      //       }
+      //       this.options.push(data)
+      //     }
+      //     this.selectValue = res.data[0]
+      //     //localStorage.setItem("selectData",this.selectValue)
+      //   }
+      // });
     },
     //下拉改变
     getValue() {

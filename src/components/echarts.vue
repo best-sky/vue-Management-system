@@ -160,20 +160,20 @@ export default {
     },
     //获取图表数据
     getEchartsData(){
-      this.$axios({
-        url: "data/OneData",
-        method: "POST",
-        data:{
-          id:localStorage.getItem("selectData")
-        }
-      }).then(res => {
-        if(res.status == 200){
-          this.conductData(res.data)
-          console.log(this.echartData)
-          console.log(this.echartData2)
-          this.drawLine();
-        }
-      });
+      // this.$axios({
+      //   url: "data/OneData",
+      //   method: "POST",
+      //   data:{
+      //     id:localStorage.getItem("selectData")
+      //   }
+      // }).then(res => {
+      //   if(res.status == 200){
+      //     this.conductData(res.data)
+      //     console.log(this.echartData)
+      //     console.log(this.echartData2)
+      //     this.drawLine();
+      //   }
+      // });
     }
   },
   created(){
