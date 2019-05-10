@@ -9,7 +9,7 @@
                text-color="#a0aebc"
                active-text-color="#ffffff"
               >
-          <el-menu-item index="/index">
+          <!-- <el-menu-item index="/index">
             <i class="el-icon-document"></i>
             <span slot="title">水温</span>
           </el-menu-item>
@@ -20,10 +20,18 @@
           <el-menu-item index="/temperature2">
             <i class="el-icon-document"></i>
             <span slot="title">体温</span>
-          </el-menu-item>
-          <el-menu-item index="/new">
+          </el-menu-item> -->
+          <el-menu-item index="/new" v-show="this.userName =='admin'">
             <i class="el-icon-document"></i>
-            <span slot="title">图表</span>
+            <span slot="title">总览</span>
+          </el-menu-item>
+          <el-menu-item index="/new2" v-show="this.userName =='admin'">
+            <i class="el-icon-document"></i>
+            <span slot="title">病历</span>
+          </el-menu-item>
+          <el-menu-item index="/myEchart" v-show="this.userName !=='admin'">
+            <i class="el-icon-document"></i>
+            <span slot="title">我的病例</span>
           </el-menu-item>
       </el-menu>
     </el-col>
@@ -35,11 +43,14 @@ export default {
   name: "LeftNav",
   data () {
     return {
-      
+      userName:''
     };
   },
   methods: {
     
+  },
+  mounted(){
+    this.userName = JSON.parse(sessionStorage.getItem("user"))
   }
 };
 </script>

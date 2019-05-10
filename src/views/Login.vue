@@ -93,7 +93,7 @@ export default {
           //   }
           // });
           sessionStorage.setItem("user", JSON.stringify(_this.form.name));
-          _this.$router.push({ path: "/index" });
+          _this.$router.push({ path: "/new" });
         } else {
           return false;
         }
