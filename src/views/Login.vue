@@ -75,25 +75,28 @@ export default {
       var _this = this;
       this.$refs[formName].validate(valid => {
         if (valid) {
-          // this.$axios({
-          //   url: "login",
-          //   method: "POST",
-          //   data: {
-          //     loginName: this.form.name,
-          //     password: this.form.password
-          //   }
-          // }).then(res => {
-          //   if(res.data == "success"){
-          //     sessionStorage.setItem("user", JSON.stringify(_this.form.name));
-          //     _this.$router.push({ path: "/index" });
-          //   } else {
-          //     this.$message.error(res.data);
-          //     this.form.name = "";
-          //     this.form.password = ""
-          //   }
-          // });
-          sessionStorage.setItem("user", JSON.stringify(_this.form.name));
-          _this.$router.push({ path: "/new" });
+          this.$axios({
+            url: "login",
+            method: "POST",
+            data: {
+              loginName: this.form.name,
+              password: this.form.password
+            }
+          }).then(res => {
+            if(res.data.message == "success"){
+              if(res.data.role == "22"){
+                sessionStorage.setItem("user", JSON.stringify("admin"));
+                _this.$router.push({ path: "/new" });
+              } else {
+                sessionStorage.setItem("user", JSON.stringify("other"));
+                _this.$router.push({ path: "/myEchart" });
+              }
+            } else {
+              this.$message.error(res.data);
+              this.form.name = "";
+              this.form.password = ""
+            }
+          });
         } else {
           return false;
         }

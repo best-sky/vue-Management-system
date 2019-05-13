@@ -8,6 +8,7 @@ import Login from './views/Login.vue'
 import newEchart from './views/newEchart.vue'
 import newEchart2 from './views/newEchart2.vue'
 import myEchart from './views/myEchart.vue'
+import myTable from './views/myTable.vue'
 
 Vue.use(Router)
 
@@ -54,6 +55,11 @@ export default new Router({
           path:'/myEchart',
           name:'myEchart',
           component:myEchart
+        },
+        {
+          path:'/myTable',
+          name:'myTable',
+          component:myTable
         }
       ]
     },

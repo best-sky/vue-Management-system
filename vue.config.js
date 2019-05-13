@@ -9,12 +9,12 @@ module.exports = {
     port: 8083,
     https: false,
     open: true,
-    // proxy: {
-    //   '/': {
-    //     target: 'http://shixiang.ngrok.xiaomiqiu.cn',
-    //     ws: false,
-    //     changeOrigin: true
-    //   }
-    // }
+    proxy: {
+      '/': {
+        target: 'http://shixiang.ngrok.xiaomiqiu.cn',
+        ws: false,
+        changeOrigin: true
+      }
+    }
   }
 }

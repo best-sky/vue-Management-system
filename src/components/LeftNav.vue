@@ -2,7 +2,7 @@
   <div class="LeftNav">
     <el-col :span="24">
       <el-menu router
-               default-active="/index"
+               :default-active="$route.path"
                unique-opened
                class="el-menu-vertical-demo"
                background-color="#30363E"
@@ -25,7 +25,7 @@
             <i class="el-icon-document"></i>
             <span slot="title">总览</span>
           </el-menu-item>
-          <el-menu-item index="/new2" v-show="this.userName =='admin'">
+          <el-menu-item index="/myTable" v-show="this.userName =='admin'">
             <i class="el-icon-document"></i>
             <span slot="title">病历</span>
           </el-menu-item>
