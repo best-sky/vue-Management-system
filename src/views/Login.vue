@@ -1,25 +1,48 @@
 <template>
   <div class="bg">
     <div class="login-wrap animated flipInY">
-      <h3>亚低温监控系统</h3>
-      <el-form ref="form"
+      <el-tabs v-model="activeName">
+        <el-tab-pane label="登录" name="first">
+          <el-form ref="form"
                :model="form"
                :rules="rules"
                label-width="0px">
-        <el-form-item prop="name">
-          <el-input placeholder="用户名"
-                    v-model="form.name"></el-input>
-        </el-form-item>
-        <el-form-item prop="password">
-          <el-input placeholder="密码"
-                    v-model="form.password"
-                    type="password"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary"
-                     @click="Login('form')">登录</el-button>
-        </el-form-item>
-      </el-form>
+            <el-form-item prop="name">
+              <el-input placeholder="用户名"
+                        v-model="form.name"></el-input>
+            </el-form-item>
+            <el-form-item prop="password">
+              <el-input placeholder="密码"
+                        v-model="form.password"
+                        type="password"></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary"
+                        @click="Login('form')">登录</el-button>
+            </el-form-item>
+          </el-form>
+        </el-tab-pane>
+        <el-tab-pane label="注册" name="second">
+          <el-form ref="register"
+               :model="register"
+               :rules="rules"
+               label-width="0px">
+            <el-form-item prop="name">
+              <el-input placeholder="请输入用户名"
+                        v-model="register.name"></el-input>
+            </el-form-item>
+            <el-form-item prop="password">
+              <el-input placeholder="请输入密码"
+                        v-model="register.password"
+                        type="password"></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary"
+                        @click="userReg('register')">注册</el-button>
+            </el-form-item>
+          </el-form>
+        </el-tab-pane>
+      </el-tabs>
     </div>
     <!-- 粒子漂浮物 -->
     <vue-particles color="#fff"
@@ -45,9 +68,14 @@ export default {
   name: "Login",
   data () {
     return {
+      activeName: 'first',
       form: {
         name:"admin",
         password:"123456"
+      },
+      register: {
+        name:"",
+        password:""
       },
       rules: {
         name: [
@@ -103,6 +131,16 @@ export default {
         }
       });
     },
+    userReg(formName){
+      this.$refs[formName].validate((valid) => {
+          if (valid) {
+            alert('submit!');
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+      });
+    }
   }
 };
 </script>
@@ -131,7 +169,7 @@ export default {
   padding: 20px;
   z-index: 3;
   margin-right: -37%;
-  background: rgba(216, 220, 229, 0.5);
+  background:#ffffff;
   .el-form-item {
     margin-bottom: 25px !important;
   }
