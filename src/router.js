@@ -9,6 +9,7 @@ import newEchart from './views/newEchart.vue'
 import newEchart2 from './views/newEchart2.vue'
 import myEchart from './views/myEchart.vue'
 import myTable from './views/myTable.vue'
+import Register from './views/Register.vue'
 
 Vue.use(Router)
 
@@ -60,6 +61,11 @@ export default new Router({
           path:'/myTable',
           name:'myTable',
           component:myTable
+        },
+        {
+          path:'/register',
+          name:'register',
+          component:Register
         }
       ]
     },

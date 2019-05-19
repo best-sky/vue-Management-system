@@ -27,6 +27,18 @@ export default {
   methods: {
     deleteRow(index, rows) {
       rows.splice(index, 1);
+      console.log(rows)
+      this.$axios({
+        url: "/patient/delete",
+        method: "POST",
+        data:{
+          NameID:rows[index].iD
+        }
+      }).then(res => {
+        if (res.status == 200) {
+
+        }
+      });
     },
     getList() {
       this.$axios({

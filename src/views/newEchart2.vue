@@ -1,21 +1,18 @@
 <template>
   <div class="echart">
-    <div id="myChartWrap">
-      <!-- 这里是要渲染的图表 -->
+    <!--  <div id="myChartWrap">
+     这里是要渲染的图表 
       <div id="myChart"></div>
-    </div>
+    </div>-->
     <div class="echart-table">
       <el-table :data="tableData" style="width: 100%" @row-click="openDetails">
-        <el-table-column prop="iD" label="ID"></el-table-column>
-        <el-table-column prop="waterT1" label="水温1"></el-table-column>
-        <el-table-column prop="waterT2" label="水温2"></el-table-column>
-        <el-table-column prop="rugRT" label="右毯温"></el-table-column>
-        <el-table-column prop="bodyRT" label="右体温"></el-table-column>
-        <el-table-column prop="rugLT" label="左毯温"></el-table-column>
-        <el-table-column prop="bodyLT" label="左体温"></el-table-column>
+        <el-table-column prop="id" label="ID"></el-table-column>
+        <el-table-column prop="waterT" label="水温"></el-table-column>
+        <el-table-column prop="rugT" label="毯温"></el-table-column>
+        <el-table-column prop="bodyT" label="体温"></el-table-column>
         <el-table-column prop="waterLevel" label="水位"></el-table-column>
-        <el-table-column prop="pumpL" label="左水泵"></el-table-column>
-        <el-table-column prop="pumpR" label="右水泵"></el-table-column>
+        <el-table-column prop="pump" label="水泵"></el-table-column>
+        <el-table-column prop="place" label="病人床位"></el-table-column>
         <el-table-column prop="comp" label="压缩机"></el-table-column>
         <el-table-column prop="heat" label="加热器"></el-table-column>
         <el-table-column :formatter="dateFormat" prop="date" label="添加时间"></el-table-column>
@@ -111,45 +108,19 @@ export default {
       rows.splice(index, 1);
     },
     openDetails(row) {
-      this.$axios({
-        url: "/data/OneData",
-        method: "POST",
-        data: {
-          id: row.iD
-        }
-      }).then(res => {
-        if (res.status == 200) {
-          this.waterT1 = [];
-          this.waterT2 = [];
-          this.RunLT = [];
-          this.RunRT = [];
-          this.bodyLT = [];
-          this.bodyRT = [];
-          this.timeData = [];
-          this.conductData(res.data);
-          this.drawLine();
-        }
-      });
+  
     },
     //设置图表的宽高
-    setSize() {
-      console.log("setSize被执行");
-      let wrapWidth = document.getElementById("myChartWrap").clientWidth;
-      let wrapHeight = document.getElementById("myChartWrap").clientHeight;
-      this.myChart.resize({
-        width: wrapWidth,
-        height: wrapHeight
-      });
-    },
+    // setSize() {
+    //   console.log("setSize被执行");
+    //   let wrapWidth = document.getElementById("myChartWrap").clientWidth;
+    //   let wrapHeight = document.getElementById("myChartWrap").clientHeight;
+    //   this.myChart.resize({
+    //     width: wrapWidth,
+    //     height: wrapHeight
+    //   });
+    // },
     drawLine() {
-      // for (var i = 0; i < 2; i++) {
-      //   this.echartData.push(this.randomData());
-      //   this.echartData2.push(this.randomData2());
-      // }
-      // for (var i = 0; i < 24; i++) {
-      //   this.data.push(this.randomData());
-      //   this.data2.push(this.randomData2());
-      // }
       this.myChart.setOption({
         title: {
           text: "时间坐标轴"
@@ -258,18 +229,6 @@ export default {
       }).then(res => {
         if (res.status == 200) {
           this.tableData = res.data;
-          // this.$axios({
-          //   url: "/data/OneData",
-          //   method: "POST",
-          //   data: {
-          //     id: res.data[0].iD
-          //   }
-          // }).then(res => {
-          //   if (res.status == 200) {
-          //     this.conductData(res.data);
-          //     this.drawLine();
-          //   }
-          // });
         }
       });
     },
@@ -308,28 +267,18 @@ export default {
         this.bodyRT.push(data6.value[1]);
         this.timeData.push(data1.name);
       }
-      console.log(this.bodyRT);
     }
   },
-  // created() {
-  //   //检测select下拉变化
-  //   window.addEventListener("setItem", () => {
-  //     console.log(localStorage.getItem("selectData"));
-  //   });
-  // },
   mounted() {
     this.getTableData();
-    this.setSize();
+    // this.setSize();
     this.drawLine();
     // 添加监听事件，监听窗口变化，窗口一变，包裹层的宽高也就变了
-    window.onresize = () => {
-      //设置图表宽高
-      this.setSize();
-    };
+    // window.onresize = () => {
+    //   //设置图表宽高
+    //   this.setSize();
+    // };
   }
-  // destroyed() {
-  //   clearInterval(this.timer);
-  // }
 };
 </script>
 <style lang="less" scoped>

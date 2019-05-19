@@ -29,6 +29,10 @@
             <i class="el-icon-document"></i>
             <span slot="title">病历</span>
           </el-menu-item>
+          <el-menu-item index="/register" v-show="this.userName =='admin'">
+            <i class="el-icon-document"></i>
+            <span slot="title">注册病人</span>
+          </el-menu-item>
           <el-menu-item index="/myEchart" v-show="this.userName !=='admin'">
             <i class="el-icon-document"></i>
             <span slot="title">我的病例</span>

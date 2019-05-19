@@ -84,6 +84,7 @@ export default {
             }
           }).then(res => {
             if(res.data.message == "success"){
+              localStorage.setItem("username", JSON.stringify(this.form.name));
               if(res.data.role == "22"){
                 sessionStorage.setItem("user", JSON.stringify("admin"));
                 _this.$router.push({ path: "/new" });
