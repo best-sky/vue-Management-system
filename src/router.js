@@ -10,6 +10,10 @@ import newEchart2 from './views/newEchart2.vue'
 import myEchart from './views/myEchart.vue'
 import myTable from './views/myTable.vue'
 import Register from './views/Register.vue'
+import EquipmentManagement from './views/EquipmentManagement.vue'
+import UserEquipment from './views/UserEquipment.vue'
+import UserManagement from './views/UserManagement.vue'
+import userDetail from './views/userDetail.vue'
 
 Vue.use(Router)
 
@@ -66,7 +70,27 @@ export default new Router({
           path:'/register',
           name:'register',
           component:Register
-        }
+        },
+        {
+          path:'/EquipmentManagement',
+          name:'EquipmentManagement',
+          component:EquipmentManagement
+        },
+        {
+          path:'/UserEquipment',
+          name:'UserEquipment',
+          component:UserEquipment
+        },
+        {
+          path:'/UserManagement',
+          name:'UserManagement',
+          component:UserManagement
+        },
+        {
+          path:'/userDetail',
+          name:'userDetail',
+          component:userDetail
+        },
       ]
     },
   ]

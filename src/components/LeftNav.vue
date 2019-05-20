@@ -21,21 +21,21 @@
             <i class="el-icon-document"></i>
             <span slot="title">体温</span>
           </el-menu-item> -->
-          <el-menu-item index="/new" v-show="this.userName =='admin'">
+          <el-menu-item index="/UserManagement" v-show="this.userName =='admin'">
             <i class="el-icon-document"></i>
-            <span slot="title">总览</span>
+            <span slot="title">客户管理</span>
           </el-menu-item>
-          <el-menu-item index="/myTable" v-show="this.userName =='admin'">
+          <el-menu-item index="/EquipmentManagement" v-show="this.userName =='admin'">
             <i class="el-icon-document"></i>
-            <span slot="title">病历</span>
+            <span slot="title">设备管理</span>
           </el-menu-item>
           <el-menu-item index="/register" v-show="this.userName =='admin'">
             <i class="el-icon-document"></i>
-            <span slot="title">注册病人</span>
+            <span slot="title">注册管理员</span>
           </el-menu-item>
-          <el-menu-item index="/myEchart" v-show="this.userName !=='admin'">
+          <el-menu-item index="/UserEquipment" v-show="this.userName !=='admin'">
             <i class="el-icon-document"></i>
-            <span slot="title">我的病例</span>
+            <span slot="title">设备管理</span>
           </el-menu-item>
       </el-menu>
     </el-col>

@@ -103,29 +103,31 @@ export default {
       var _this = this;
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.$axios({
-            url: "login",
-            method: "POST",
-            data: {
-              loginName: this.form.name,
-              password: this.form.password
-            }
-          }).then(res => {
-            if(res.data.message == "success"){
-              localStorage.setItem("username", JSON.stringify(this.form.name));
-              if(res.data.role == "22"){
-                sessionStorage.setItem("user", JSON.stringify("admin"));
-                _this.$router.push({ path: "/new" });
-              } else {
-                sessionStorage.setItem("user", JSON.stringify("other"));
-                _this.$router.push({ path: "/myEchart" });
-              }
-            } else {
-              this.$message.error(res.data);
-              this.form.name = "";
-              this.form.password = ""
-            }
-          });
+          // this.$axios({
+          //   url: "login",
+          //   method: "POST",
+          //   data: {
+          //     loginName: this.form.name,
+          //     password: this.form.password
+          //   }
+          // }).then(res => {
+          //   if(res.data.message == "success"){
+          //     localStorage.setItem("username", JSON.stringify(this.form.name));
+          //     if(res.data.role == "22"){
+          //       sessionStorage.setItem("user", JSON.stringify("admin"));
+          //       _this.$router.push({ path: "/UserManagement" });
+          //     } else {
+          //       sessionStorage.setItem("user", JSON.stringify("other"));
+          //       _this.$router.push({ path: "/UserEquipment" });
+          //     }
+          //   } else {
+          //     this.$message.error(res.data);
+          //     this.form.name = "";
+          //     this.form.password = ""
+          //   }
+          // });
+           sessionStorage.setItem("user", JSON.stringify("admin"));
+           _this.$router.push({ path: "/UserManagement" });
         } else {
           return false;
         }
