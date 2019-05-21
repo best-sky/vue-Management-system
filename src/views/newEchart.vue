@@ -161,6 +161,26 @@ export default {
         }
       });
     },
+    //图表接口
+    getEchartData(){
+      var id = this.$route.query.id
+      this.$axios.get('/data/OneData',{
+        params: {
+          id: id
+        }
+      }).then(res => {
+          this.tableData = res.data
+          this.waterT1 = [];
+          this.waterT2 = [];
+          this.RunLT = [];
+          this.RunRT = [];
+          this.bodyLT = [];
+          this.bodyRT = [];
+          this.timeData = [];
+          this.conductData(res.data);
+          this.drawLine();
+      });
+    },
     //设置图表的宽高
     setSize() {
       console.log("setSize被执行");
@@ -344,7 +364,8 @@ export default {
   //   });
   // },
   mounted() {
-    this.getTableData();
+    //this.getTableData();
+    this.getEchartData()
     this.setSize();
     this.drawLine();
     // 添加监听事件，监听窗口变化，窗口一变，包裹层的宽高也就变了

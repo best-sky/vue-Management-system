@@ -3,7 +3,6 @@
     <el-col :span="24">
       <el-menu router
                :default-active="$route.path"
-               unique-opened
                class="el-menu-vertical-demo"
                background-color="#30363E"
                text-color="#a0aebc"
@@ -21,19 +20,19 @@
             <i class="el-icon-document"></i>
             <span slot="title">体温</span>
           </el-menu-item> -->
-          <el-menu-item index="/UserManagement" v-show="this.userName =='admin'">
+          <el-menu-item index="/UserManagement" v-if="this.userName =='admin'">
             <i class="el-icon-document"></i>
             <span slot="title">客户管理</span>
           </el-menu-item>
-          <el-menu-item index="/EquipmentManagement" v-show="this.userName =='admin'">
+          <el-menu-item index="/EquipmentManagement" v-if="this.userName =='admin'">
             <i class="el-icon-document"></i>
             <span slot="title">设备管理</span>
           </el-menu-item>
-          <el-menu-item index="/register" v-show="this.userName =='admin'">
+          <el-menu-item index="/register" v-if="this.userName =='admin'">
             <i class="el-icon-document"></i>
             <span slot="title">注册管理员</span>
           </el-menu-item>
-          <el-menu-item index="/UserEquipment" v-show="this.userName !=='admin'">
+          <el-menu-item index="/UserEquipment" v-if="this.userName !=='admin'">
             <i class="el-icon-document"></i>
             <span slot="title">设备管理</span>
           </el-menu-item>
