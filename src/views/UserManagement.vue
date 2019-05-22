@@ -143,7 +143,7 @@ export default {
   },
   methods: {
     deleteRow(index, rows) {
-      rows.splice(index, 1);
+      // rows.splice(index, 1);
       this.$axios
         .get("/user/delete", {
           params: {
@@ -151,7 +151,7 @@ export default {
           }
         })
         .then(res => {
-          console.log(res);
+          this.getList()
         });
     },
     getList() {
