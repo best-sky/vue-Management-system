@@ -160,7 +160,7 @@ export default {
       });
     },
     openDetails(row) {
-      // this.$router.push({path: '/new2', query: {id:row.iD}})
+      this.$router.push({path: '/userEqNumber', query: {id:row.id}})
     },
     //增加客户
     addUser() {

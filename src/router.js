@@ -14,6 +14,7 @@ import EquipmentManagement from './views/EquipmentManagement.vue'
 import UserEquipment from './views/UserEquipment.vue'
 import UserManagement from './views/UserManagement.vue'
 import userDetail from './views/userDetail.vue'
+import userEqNumber from './views/userEqNumber.vue'
 
 Vue.use(Router)
 
@@ -91,6 +92,11 @@ export default new Router({
           name:'userDetail',
           component:userDetail
         },
+        {
+          path:'/userEqNumber',
+          name:'userEqNumber',
+          component:userEqNumber
+        }
       ]
     },
   ]

@@ -13,10 +13,9 @@
             <el-button
               @click.stop="deleteRow(scope.$index, tableData)"
               type="primary"
-              v-if="tableData[scope.$index].ifDelete == 1"
               size="small"
             >销毁设备</el-button>
-            <el-button disabled type="primary" v-else size="small">销毁设备</el-button>
+            <!-- <el-button disabled type="primary" v-else size="small">销毁设备</el-button> -->
             <el-button
               @click.stop="recovery(scope.$index, tableData)"
               v-if="tableData[scope.$index].ifRecovery == 1"

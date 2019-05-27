@@ -133,6 +133,7 @@ export default {
   },
   created() {},
   methods: {
+    //登录
     Login(formName) {
       var _this = this;
       this.$refs[formName].validate(valid => {
@@ -165,6 +166,7 @@ export default {
         }
       });
     },
+    //注册
     userReg(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -181,14 +183,10 @@ export default {
               }
             })
             .then(res => {
-              if (res == "成功") {
                 this.$message({
-                  message: res.data.message,
+                  message: res.data,
                   type: "success"
                 });
-              } else {
-                this.$message.error(res.data);
-              }
             });
         } else {
           console.log("error submit!!");
