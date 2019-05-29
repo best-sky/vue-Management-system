@@ -122,26 +122,12 @@ export default {
         ]
       },
       tableData: [
-        // {
-        //   id: "001",
-        //   username: "王小虎1"
-        // },
-        // {
-        //   id: "002",
-        //   username: "王小虎2"
-        // },
-        // {
-        //   id: "003",
-        //   username: "王小虎3"
-        // },
-        // {
-        //   id: "004",
-        //   username: "王小虎4"
-        // }
+       
       ]
     };
   },
   methods: {
+    //客户删除
     deleteRow(index, rows) {
       // rows.splice(index, 1);
       this.$axios
@@ -154,11 +140,13 @@ export default {
           this.getList()
         });
     },
+    //客户列表获取
     getList() {
       this.$axios.get("/user/customlook").then(res => {
         this.tableData = res.data;
       });
     },
+    //客户设备详情跳转点击
     openDetails(row) {
       this.$router.push({path: '/userEqNumber', query: {id:row.id}})
     },
@@ -167,6 +155,7 @@ export default {
       this.dialogFormVisible = true;
       this.resetForm();
     },
+    //搜索客户
     search() {
       if (this.searchInput == "") {
         this.getList();
@@ -185,6 +174,7 @@ export default {
           });
       }
     },
+    //确定增加客户
     sure() {
       this.$axios
         .get("user/customeradd", {

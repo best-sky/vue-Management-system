@@ -15,6 +15,7 @@ export default {
       }
   },
   methods: {
+    //获取设备列表
     getList() {
       var id = this.$route.query.id
       this.$axios

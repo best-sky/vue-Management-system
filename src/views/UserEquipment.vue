@@ -77,6 +77,7 @@ export default {
     };
   },
   methods: {
+    //搜索设备
     search() {
       if (this.searchInput == "") {
         this.getList();
@@ -111,22 +112,11 @@ export default {
         }
         });
     },
-    addManagement() {
-      this.dialogTableVisible = true;
-      this.radio = "";
-      this.$axios.get("/equip/getOffEquip").then(res => {
-        this.radioData = [];
-        for (var i = 0; i < res.data.length; i++) {
-          var data = {
-            label:res.data[i]
-          }
-          this.radioData.push(data);
-        }
-      });
-    },
+    //设备详情跳转
     openDetails(row) {
       this.$router.push({path: '/new', query: {id:row.equipid}})
     },
+    //销毁设备
     deleteRow(index, rows) {
       this.$axios
         .get("equip/delete", {
@@ -139,6 +129,7 @@ export default {
           this.getList();
         });
     },
+    //弹框取消
     cancel() {
       this.dialogTableVisible = false;
     },
@@ -153,24 +144,10 @@ export default {
         this.getList();
       });
     },
-    // //分配机器
-    // distribution(index, rows) {
-    //   this.dialogDistribution = true;
-    //   this.selectId = rows[index].equipid
-    //   this.userRadio = "";
-    //   this.$axios.get("/equip/getUserList").then(res => {
-    //     this.userNameData = []
-    //     for (var i = 0; i < res.data.length; i++) {
-    //       var data = {
-    //         label:res.data[i]
-    //       }
-    //       this.userNameData.push(data)
-    //     }
-    //   });
-    // },
     cancelDistribution() {
       this.dialogDistribution = false;
     },
+    //确定退回设备
     sureDistribution(){
       this.dialogDistribution = false;
        this.$axios.get("/equip/equipCustomerReback",{
@@ -182,6 +159,7 @@ export default {
         this.getList();
       });
     },
+    //设备列表获取
     getList() {
       this.$axios.get("/equip/equipCustomerList",{
         params: {

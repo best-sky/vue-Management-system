@@ -93,6 +93,7 @@ export default {
     }
   },
   methods: {
+    //格式化日期
     dateFormat(row, column, cellValue, index) {
       const daterc = row[column.property];
       var date = new Date(daterc);
@@ -111,28 +112,6 @@ export default {
         date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
       return Y + M + D + h + m;
     },
-    submitForm(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          this.$axios({
-            url: "/data/register",
-            method: "POST",
-            data: {
-              ID: this.ruleForm.id,
-              Username: this.ruleForm.username,
-              Password: this.ruleForm.password
-            }
-          }).then(res => {
-            if (res.status == 200) {
-              this.resetForm(formName);
-            }
-          });
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
-      });
-    },
     resetForm(formName) {
       this.$refs[formName].resetFields();
     },
@@ -140,6 +119,7 @@ export default {
     deleteRow(index, rows) {
       rows.splice(index, 1);
     },
+    //表格每一行点击
     openDetails(row) {
       this.$axios({
         url: "/data/OneData",
@@ -191,6 +171,7 @@ export default {
         height: wrapHeight
       });
     },
+    //图表参数配置
     drawLine() {
       // for (var i = 0; i < 2; i++) {
       //   this.echartData.push(this.randomData());
@@ -281,20 +262,6 @@ export default {
           }
         ]
       });
-    },
-    randomData() {
-      this.now = new Date(+this.now + 3600 * 1000);
-      this.value = this.value + Math.random() * 21 - 10;
-      return {
-        name: this.now.toString(),
-        value: [this.now, Math.round(this.value)]
-      };
-    },
-    randomData2() {
-      return {
-        name: this.now.toString(),
-        value: [this.now, Math.round(this.value + 100)]
-      };
     },
     //获取表格的数据
     getTableData() {
