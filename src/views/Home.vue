@@ -5,9 +5,6 @@
         <img src="../assets/images/logo.png" alt="">
         <span>亚低温治疗仪云监控系统</span>
         <div class="select-content">
-          <!-- <el-select v-model="selectValue" placeholder="请选择" @change="getValue()">
-            <el-option v-for="item in options" :key="item.value" :value="item.value"></el-option>
-          </el-select> -->
         </div>
       </el-col>
       <el-col :span="3"

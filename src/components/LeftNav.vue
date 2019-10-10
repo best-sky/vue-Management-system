@@ -8,18 +8,6 @@
                text-color="#a0aebc"
                active-text-color="#ffffff"
               >
-          <!-- <el-menu-item index="/index">
-            <i class="el-icon-document"></i>
-            <span slot="title">水温</span>
-          </el-menu-item>
-          <el-menu-item index="/temperature">
-            <i class="el-icon-document"></i>
-            <span slot="title">毯温</span>
-          </el-menu-item>
-          <el-menu-item index="/temperature2">
-            <i class="el-icon-document"></i>
-            <span slot="title">体温</span>
-          </el-menu-item> -->
           <el-menu-item index="/UserManagement" v-if="this.userName =='admin'">
             <i class="el-icon-document"></i>
             <span slot="title">客户管理</span>
